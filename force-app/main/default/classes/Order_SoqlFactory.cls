@@ -581,15 +581,17 @@ public with sharing class Order_SoqlFactory {
        +' ProductComponent__r.Product__r.Type__c,'
        +' ProductComponent__r.MainProduct__r.itemGroupManualBlock__c,'  
        +' ProductComponent__r.Product__r.Name'
-       +' from Pricing__c Where '
-       +'  StartDate__c <=: CurDate'
-       +'  AND EndDate__c >=: CurDate'
-       +'  AND IsActive__c =true ';
+       +' from Pricing__c where ';
     
+       if(Type != 'Pricebookentrycreate' && Type != 'UpdatePricingfromProduct'){
+            Querystr += ' StartDate__c <=: CurDate AND EndDate__c >=: CurDate AND IsActive__c =true ';
+       } 
+
        if(Type == 'ProductSelector1'){
+           
             Querystr += 'AND(ProductComponent__r.MainProduct__c in: Set_ProdItemGroup OR ProductComponent__r.Product__c in: Set_ProdItemGroup OR Product__c in: Set_ProdItemGroup )';
        }
-       else if(Type == 'ProductSelector2'){
+       else if(Type == 'ProductSelector2'){   
             Querystr += 'AND (ProductComponent__r.MainProduct__c in: Set_ProdItemGroup OR id in: lst_ProdPriceId)';
        } 
        else if(Type == 'ItemgroupCreate'){
