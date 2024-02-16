@@ -601,10 +601,10 @@ public with sharing class Order_SoqlFactory {
             Querystr += 'AND (ProductComponent__r.Product__c in: lst_ProdPriceId AND ProductComponent__r.MainProduct__c in: Set_ProdItemGroup)';
        }
        else if(Type == 'Pricebookentrycreate'){
-            Querystr += 'AND id in:lst_ProdPriceId AND ProductComponent__c = null';   
+            Querystr += ' id in:lst_ProdPriceId AND ProductComponent__c = null';   
         }
        else if(Type == 'UpdatePricingfromProduct'){
-            Querystr += 'AND (Product__c in:Set_ProdItemGroup OR ProductComponent__r.Product__c in: Set_ProdItemGroup)';
+            Querystr += ' (Product__c in:Set_ProdItemGroup OR ProductComponent__r.Product__c in: Set_ProdItemGroup)';
        }
   
        system.debug('**Order_SoqlFactory.returnPricing :Querystr**'+Querystr);
