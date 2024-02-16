@@ -604,7 +604,7 @@ public with sharing class Order_SoqlFactory {
             Querystr += ' id in:lst_ProdPriceId AND ProductComponent__c = null';   
         }
        else if(Type == 'UpdatePricingfromProduct'){
-            Querystr += ' (Product__c in:Set_ProdItemGroup OR ProductComponent__r.Product__c in: Set_ProdItemGroup)';
+            Querystr += ' (Product__c in:lst_ProdPriceId OR ProductComponent__r.Product__c in: lst_ProdPriceId)';
        }
   
        system.debug('**Order_SoqlFactory.returnPricing :Querystr**'+Querystr);
