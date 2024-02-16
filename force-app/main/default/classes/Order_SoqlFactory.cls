@@ -581,10 +581,10 @@ public with sharing class Order_SoqlFactory {
        +' ProductComponent__r.Product__r.Type__c,'
        +' ProductComponent__r.MainProduct__r.itemGroupManualBlock__c,'  
        +' ProductComponent__r.Product__r.Name'
-       +' from Pricing__c where ';
+       +' from Pricing__c where AND IsActive__c =true ';
     
        if(Type != 'Pricebookentrycreate' && Type != 'UpdatePricingfromProduct'){
-            Querystr += ' StartDate__c <=: CurDate AND EndDate__c >=: CurDate AND IsActive__c =true ';
+            Querystr += 'AND  StartDate__c <=: CurDate AND EndDate__c >=: CurDate  ';
        } 
 
        if(Type == 'ProductSelector1'){
@@ -601,10 +601,10 @@ public with sharing class Order_SoqlFactory {
             Querystr += 'AND (ProductComponent__r.Product__c in: lst_ProdPriceId AND ProductComponent__r.MainProduct__c in: Set_ProdItemGroup)';
        }
        else if(Type == 'Pricebookentrycreate'){
-            Querystr += ' id in:lst_ProdPriceId AND ProductComponent__c = null';   
+            Querystr += 'AND id in:lst_ProdPriceId AND ProductComponent__c = null';   
         }
        else if(Type == 'UpdatePricingfromProduct'){
-            Querystr += ' (Product__c in:lst_ProdPriceId OR ProductComponent__r.Product__c in: lst_ProdPriceId)';
+            Querystr += 'AND (Product__c in:lst_ProdPriceId OR ProductComponent__r.Product__c in: lst_ProdPriceId)';
        }
   
        system.debug('**Order_SoqlFactory.returnPricing :Querystr**'+Querystr);
