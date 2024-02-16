@@ -581,7 +581,7 @@ public with sharing class Order_SoqlFactory {
        +' ProductComponent__r.Product__r.Type__c,'
        +' ProductComponent__r.MainProduct__r.itemGroupManualBlock__c,'  
        +' ProductComponent__r.Product__r.Name'
-       +' from Pricing__c where AND IsActive__c =true ';
+       +' from Pricing__c where IsActive__c =true ';
     
        if(Type != 'Pricebookentrycreate' && Type != 'UpdatePricingfromProduct'){
             Querystr += 'AND  StartDate__c <=: CurDate AND EndDate__c >=: CurDate  ';
