@@ -146,7 +146,7 @@ public with sharing class Order_SoqlFactory {
 
         String Querystr;
        
-    
+     
         Querystr= 'Select id,'
     
          + 'ActivateforBatchProcessing__c, '
