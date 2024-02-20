@@ -234,7 +234,7 @@ public with sharing class Order_OrderLineCountManager implements Queueable {
         else{
             Map_ImpLineCount.put(99999999,lst_OrdItem.size()); 
             for(OrderItem item:lst_OrdItem){
-                if(Map_ImpLineCount.get(99999999)==null){
+                if(Map_ImpLineCountQuantity.get(99999999)==null){
                     Map_ImpLineCountQuantity.put(99999999,item.Quantity);
                 }
                 else{
