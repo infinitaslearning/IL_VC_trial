@@ -73,7 +73,7 @@ public with sharing class Order_RelatedOrderProcess {
                 
                // List<Order> lstInsertedOrd = [Select ValidationErrorsOrder__c,ValidationErrorsOrderProducts__c from Order where id in: Lst_OrdId];
                  
-                List<Order> lstInsertedOrd = Order_SoqlFactory.returnQueryOrder(null,MaxOrderLineId,null);;
+                List<Order> lstInsertedOrd = Order_SoqlFactory.returnQueryOrder(null,MaxOrderLineId,null);
                     Integer Count=0, ActiveReady=0;
                     for(Order ord:lstInsertedOrd){
                         ord.OrderImportAmountExclVAT__c = ord.TotalAmount;
@@ -85,7 +85,7 @@ public with sharing class Order_RelatedOrderProcess {
                     }
 
                     update lstInsertedOrd;
-                    
+
                     lstMaxOrderLine[0].ActivationReadyCount__c = ActiveReady;
                     lstMaxOrderLine[0].ExpectedActivationCount__c = Count;
                     lstMaxOrderLine[0].TriggerBusinessRules__c = false;
