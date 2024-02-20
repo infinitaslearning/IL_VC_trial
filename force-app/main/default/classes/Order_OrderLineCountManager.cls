@@ -219,7 +219,7 @@ public with sharing class Order_OrderLineCountManager implements Queueable {
                         else{
                             Map_ImpLineCount.put(99999999,Map_ImpLineCount.get(99999999)+1);
                             
-                            Map_ImpLineCountQuantity.put(LoopChunks,Map_ImpLineCountQuantity.get(99999999)+item.Quantity);
+                            Map_ImpLineCountQuantity.put(99999999,Map_ImpLineCountQuantity.get(99999999)+item.Quantity);
 
                         }    
                     }
@@ -238,7 +238,7 @@ public with sharing class Order_OrderLineCountManager implements Queueable {
                     Map_ImpLineCountQuantity.put(99999999,item.Quantity);
                 }
                 else{
-                    Map_ImpLineCountQuantity.put(LoopChunks,Map_ImpLineCountQuantity.get(99999999)+item.Quantity);
+                    Map_ImpLineCountQuantity.put(99999999,Map_ImpLineCountQuantity.get(99999999)+item.Quantity);
                 }    
             }    
 
@@ -542,6 +542,7 @@ public with sharing class Order_OrderLineCountManager implements Queueable {
 
             CurOrder.OrderImportLineCountSent__c = Map_ImpLineCount.get(99999999); //CurOrderGET[0].LineCount__c;
             CurOrder.OrderImportTotalLineQuantities__c = Map_ImpLineCountQuantity.get(99999999);
+            CurOrder.OrderImportAmountExclVAT__c = CurOrder.TotalAmount;
             CurOrder.MaxOrderLine__c = MaxOrderLine.id;
             CurOrder.ActivateforBatchProcessing__c= ActivateforBatchProcessing;
             CurOrder.RelatedOrderActivationBlock__c = true; 

@@ -40,6 +40,7 @@ public with sharing class Order_RelatedOrderProcess {
 
                 for(Order ord:lst_Order){
                     Lst_OrdId.add(ord.id);
+                    
                 }
 
               //  OrderItem[]   lst_OrdItem = Order_OrderandOrdeItemHandler.returnQueryOrderItems(null,Lst_OrdId);
@@ -70,17 +71,21 @@ public with sharing class Order_RelatedOrderProcess {
 
                 Order_OrderandOrdeItemHandler.OrderItemBusinessLogichandler(lst_OrdItem,lst_Order,Lst_OrdId, 'TriggerBusinessRules',lst_ListPriceDiscountRegular, null);
                 
-                List<Order> lstInsertedOrd = [Select ValidationErrorsOrder__c,ValidationErrorsOrderProducts__c from Order where id in: Lst_OrdId];
-                    
+               // List<Order> lstInsertedOrd = [Select ValidationErrorsOrder__c,ValidationErrorsOrderProducts__c from Order where id in: Lst_OrdId];
+                 
+                List<Order> lstInsertedOrd = Order_SoqlFactory.returnQueryOrder(null,MaxOrderLineId,null);;
                     Integer Count=0, ActiveReady=0;
                     for(Order ord:lstInsertedOrd){
-
+                        ord.OrderImportAmountExclVAT__c = ord.TotalAmount;
                         if(ord.ValidationErrorsOrder__c==0 && ord.ValidationErrorsOrderProducts__c==0){
                             ActiveReady++;
                         }
                         
                         Count++;
                     }
+
+                    update lstInsertedOrd;
+                    
                     lstMaxOrderLine[0].ActivationReadyCount__c = ActiveReady;
                     lstMaxOrderLine[0].ExpectedActivationCount__c = Count;
                     lstMaxOrderLine[0].TriggerBusinessRules__c = false;
@@ -89,14 +94,7 @@ public with sharing class Order_RelatedOrderProcess {
         catch(exception e){
             HandleCustomException.LogException(e,lst_Order[0].id);
         }
-            /*
-            lstMaxOrderLine = [Select id,RelatedOrderActivationready__c from MaxOrderLine__c where id in: MaxOrderLineId];             
-
-            if(lstMaxOrderLine[0].RelatedOrderActivationready__c ==True ){
-                activateOrders(MaxOrderLineId);
-            }
-            */
-
+            
     }
 
     
