@@ -443,11 +443,11 @@ public with sharing class Order_OrderLineCountManager implements Queueable {
                         //Line count sent for Master Order if Item Group the only order and main. Due to split lists above
                         if(Map_ImpLineCount.get(99999999)==null){
                             Map_ImpLineCount.put(99999999,1);
-                            Map_ImpLineCountQuantity.put(LoopChunks,item.Quantity);
+                            Map_ImpLineCountQuantity.put(99999999,item.Quantity);
                         }
                         else{
                             Map_ImpLineCount.put(99999999,Map_ImpLineCount.get(99999999)+1);
-                            Map_ImpLineCountQuantity.put(LoopChunks,Map_ImpLineCountQuantity.get(LoopChunks)+item.Quantity);
+                            Map_ImpLineCountQuantity.put(99999999,Map_ImpLineCountQuantity.get(99999999)+item.Quantity);
                         }   
                     }
                     else{
