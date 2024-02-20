@@ -653,6 +653,7 @@ public with sharing class Order_SoqlFactory {
         +' RenewalRunDate__c,'
         +' RenewalTerm__c,'
         +' ShipToAttentionOf__c,'
+        +' Terms__c,'
         +' Account.NetsuiteInternalId__c,' 
         +' Account.NumberofStudents__c,'
         +' Account.DigitalActivationEmail__c , '
