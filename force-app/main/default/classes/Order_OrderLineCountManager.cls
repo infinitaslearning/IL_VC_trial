@@ -542,7 +542,6 @@ public with sharing class Order_OrderLineCountManager implements Queueable {
 
             CurOrder.OrderImportLineCountSent__c = Map_ImpLineCount.get(99999999); //CurOrderGET[0].LineCount__c;
             CurOrder.OrderImportTotalLineQuantities__c = Map_ImpLineCountQuantity.get(99999999);
-            CurOrder.OrderImportAmountExclVAT__c = CurOrder.TotalAmount;
             CurOrder.MaxOrderLine__c = MaxOrderLine.id;
             CurOrder.ActivateforBatchProcessing__c= ActivateforBatchProcessing;
             CurOrder.RelatedOrderActivationBlock__c = true; 
