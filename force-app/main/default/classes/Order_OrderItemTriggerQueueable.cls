@@ -38,7 +38,7 @@ public with sharing class Order_OrderItemTriggerQueueable implements Queueable {
     }
 
     public void execute(System.QueueableContext qc) {
-     // system.debug('**OrderItem Trigger: Queueable Constructor: Load**'+MaxOrder[0].id);
+      system.debug('**OrderItem Trigger: Queueable : execute**');
 
       
       if(CurOrder.size()>0){      
