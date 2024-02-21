@@ -661,7 +661,7 @@ public class Order_ProductSelectController {
             
     
             //Return ProductsbyPriceBook;
-            Order[] curOrder = [Select Pricebook2Id,Billto__r.CustomerDiscountGroup__c,Billto__r.OperatingCompany__c from Order where Id =:curOrderId]; 
+            Order[] curOrder = [Select Pricebook2Id,Pricebook2.StartDate__c, Pricebook2.EndDate__c,Billto__r.CustomerDiscountGroup__c,Billto__r.OperatingCompany__c from Order where Id =:curOrderId]; 
            
             //List Price Discount - Need to recaculate for any updates to values since last save / adding ship to's will change the quantity                        
             Date CurDate = system.today();
@@ -693,10 +693,12 @@ public class Order_ProductSelectController {
             AND EndDate__c >=: system.today()
             AND IsActive__c =:true];
     */
+            
+      
     
-    
-        Pricing__c[] lstPrice = Order_SoqlFactory.returnPricing('ProductSelector1',Set_ProdItemGroup,null);		
+        Pricing__c[] lstPrice = Order_SoqlFactory.returnPricing('ProductSelector1',Set_ProdItemGroup,null,curOrder[0].Pricebook2.StartDate__c,curOrder[0].Pricebook2.EndDate__c);		
 	    system.debug('**Order_SoqlFactory.Order_ProductSelectController.returnOrderItems.lstPrice :Size**'+lstPrice.size());
+        
         
         Map<String,Decimal> Map_ComponentQuantity  =  new Map<String,Decimal>();
              
@@ -1065,7 +1067,7 @@ public class Order_ProductSelectController {
             AND IsActive__c =: true];
             */
 
-            Pricing__c[] lstPrice = Order_SoqlFactory.returnPricing('ProductSelector2',Set_ProdItemGroup,lst_ItemPrice);
+            Pricing__c[] lstPrice = Order_SoqlFactory.returnPricing('ProductSelector2',Set_ProdItemGroup,lst_ItemPrice,PricebookStart,PricebookEnd);
             system.debug('**Order_SoqlFactory.Order_ProductSelectController.loadProductsbyPriceBook.lstPrice :Size**'+lstPrice.size());
 
 

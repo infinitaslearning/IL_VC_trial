@@ -236,6 +236,8 @@ public with sharing class Order_SoqlFactory {
          +' Billto__r.BillingReminderEmail2__c, '
          +' Billto__r.InvoicingEmail__c,  ' 
          +' Pricebook2.Name,'
+         +' Pricebook2.StartDate__c, '
+         +' Pricebook2.EndDate__c, '
          +' Shipto__r.OrderNotificationEmail__c,  ' 
          +' Shipto__r.OrderNotificationEmail2__c '
          +'  from Order where ';
@@ -547,7 +549,7 @@ public with sharing class Order_SoqlFactory {
     
     }
         
-    Public static List<Pricing__c> returnPricing(String Type,Set<String> Set_ProdItemGroup,List<Id> lst_ProdPriceId){
+    Public static List<Pricing__c> returnPricing(String Type,Set<String> Set_ProdItemGroup,List<Id> lst_ProdPriceId,Date PricebookStart, Date PricebookEnd){
       
     
        String Querystr;
