@@ -219,22 +219,22 @@ public with sharing class Order_SoqlFactory_test {
 
 
         Type = 'ProductSelector1';
-        lstPricing =order_soqlfactory.returnPricing(Type,Set_ProdItemGroup,lst_ProdPriceId);
+        lstPricing =order_soqlfactory.returnPricing(Type,Set_ProdItemGroup,lst_ProdPriceId,PricebookStart,PricebookEnd);
 
         Type = 'ProductSelector2';
-        order_soqlfactory.returnPricing(Type,Set_ProdItemGroup,lst_ProdPriceId);
+        order_soqlfactory.returnPricing(Type,Set_ProdItemGroup,lst_ProdPriceId,PricebookStart,PricebookEnd);
         
         Type = 'Itemgroupupdate';
-        order_soqlfactory.returnPricing(Type,Set_ProdItemGroup,lst_ProdPriceId);
+        order_soqlfactory.returnPricing(Type,Set_ProdItemGroup,lst_ProdPriceId,PricebookStart,PricebookEnd);
 
         Type = 'Itemgroupcreate';
-        order_soqlfactory.returnPricing(Type,Set_ProdItemGroup,lst_ProdPriceId);
+        order_soqlfactory.returnPricing(Type,Set_ProdItemGroup,lst_ProdPriceId,PricebookStart,PricebookEnd);
         
         Type = 'Pricebookentrycreate';
-        order_soqlfactory.returnPricing(Type,Set_ProdItemGroup,lst_ProdPriceId);
+        order_soqlfactory.returnPricing(Type,Set_ProdItemGroup,lst_ProdPriceId,PricebookStart,PricebookEnd);
         
         Type ='UpdatePricingfromProduct';
-        order_soqlfactory.returnPricing(Type,Set_ProdItemGroup,lst_ProdPriceId);
+        order_soqlfactory.returnPricing(Type,Set_ProdItemGroup,lst_ProdPriceId,PricebookStart,PricebookEnd);
     
 
 

@@ -166,9 +166,10 @@ public with sharing class Order_ImportOrderItemGroupUpdate {
             system.debug('**Order_ImportOrderItemGroupUpdate: Map_GroupProdI**'+ Map_GroupProdId);
         }
 */
+        List<Id> OrderId = new List<Id>();
 
         for(OrderItem item: ListOfOrderItems){
-           
+            OrderId.add(item.OrderId);
             if(Map_ItemId.get(item.Id) != null){
 
                 system.debug('**Order_ImportOrderItemGroupUpdate :item.Id**'+item.Id+'**Map_ItemId**'+Map_ItemId.get(item.Id)+'****');
@@ -210,7 +211,11 @@ public with sharing class Order_ImportOrderItemGroupUpdate {
         AND EndDate__c >=: system.today()];
 */        
 
-        Pricing__c[] lstPrice = Order_SoqlFactory.returnPricing('Itemgroupupdate',Set_GroupId,Lst_ProductId);		
+        Order[] curOrder = Order_SoqlFactory.returnQueryOrder(OrderId,null,null);
+        system.debug('**Order_SoqlFactory.Order_ImportOrderItemGroupUpdate.curOrder :Size**'+curOrder.size());
+        
+        
+        Pricing__c[] lstPrice = Order_SoqlFactory.returnPricing('Itemgroupupdate',Set_GroupId,Lst_ProductId,curOrder[0].Pricebook2.StartDate__c,curOrder[0].Pricebook2.EndDate__c);		
       system.debug('**Order_SoqlFactory.Order_ImportOrderItemGroupCreate.lstPrice :Size**'+lstPrice.size());
 
 

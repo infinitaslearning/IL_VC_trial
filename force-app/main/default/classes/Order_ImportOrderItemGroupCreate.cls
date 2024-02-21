@@ -53,7 +53,7 @@ public with sharing class Order_ImportOrderItemGroupCreate {
             responses.add( res);
 
         }
-        Order[] lstOrder = [Select id,Pricebook2Id, Source__c from Order where id in:Set_OrdId ];
+        Order[] lstOrder = [Select id,Pricebook2Id, Source__c,Pricebook2.StartDate__c,Pricebook2.EndDate__c from Order where id in:Set_OrdId ];
 
         Set<String> Set_PB = new Set<String>();
 
@@ -69,7 +69,7 @@ public with sharing class Order_ImportOrderItemGroupCreate {
         AND IsActive__c =:true];
         */
 
-        Pricing__c[] lstPriceActive = Order_SoqlFactory.returnPricing('ItemgroupCreate',Set_ItemGroup,null);
+        Pricing__c[] lstPriceActive = Order_SoqlFactory.returnPricing('ItemgroupCreate',Set_ItemGroup,null,lstOrder[0].Pricebook2.StartDate__c,lstOrder[0].Pricebook2.EndDate__c);
             system.debug('**Order_SoqlFactory.Order_ImportOrderItemGroupCreate.lstPriceActive :Size**'+lstPriceActive.size());
 
 

@@ -590,25 +590,21 @@ public with sharing class Order_SoqlFactory {
        +' from Pricing__c where IsActive__c =true ';
     
        if(Type != 'Pricebookentrycreate' && Type != 'UpdatePricingfromProduct'){
-            Querystr += 'AND  StartDate__c <=: CurDate AND EndDate__c >=: CurDate  ';
+        Querystr += 'AND ((StartDate__c <=: PricebookStart AND EndDate__c >=: PricebookStart) OR (StartDate__c <=: PricebookEnd AND EndDate__c >=: PricebookEnd))';
        } 
 
        if(Type == 'ProductSelector1'){
-           
             Querystr += 'AND(ProductComponent__r.MainProduct__c in: Set_ProdItemGroup OR ProductComponent__r.Product__c in: Set_ProdItemGroup OR Product__c in: Set_ProdItemGroup )';
-            Querystr += 'AND ((StartDate__c <=: PricebookStart AND EndDate__c >=: PricebookStart) OR (StartDate__c <=: PricebookEnd AND EndDate__c >=: PricebookEnd)) AND IsActive__c = true';
         }
        else if(Type == 'ProductSelector2'){   
             Querystr += 'AND (ProductComponent__r.MainProduct__c in: Set_ProdItemGroup OR id in: lst_ProdPriceId)';
-            Querystr += 'AND ((StartDate__c <=: PricebookStart AND EndDate__c >=: PricebookStart) OR (StartDate__c <=: PricebookEnd AND EndDate__c >=: PricebookEnd)) AND IsActive__c = true';
-        
         } 
        else if(Type == 'ItemgroupCreate'){
             Querystr += 'AND (ProductComponent__r.MainProduct__c in: Set_ProdItemGroup )'; 
        }
        else if(Type == 'Itemgroupupdate'){
             Querystr += 'AND (ProductComponent__r.Product__c in: lst_ProdPriceId AND ProductComponent__r.MainProduct__c in: Set_ProdItemGroup)';
-       }
+        }
        else if(Type == 'Pricebookentrycreate'){
             Querystr += 'AND id in:lst_ProdPriceId AND ProductComponent__c = null';   
         }
