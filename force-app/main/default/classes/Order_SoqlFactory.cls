@@ -215,6 +215,7 @@ public with sharing class Order_SoqlFactory {
          + ' ValidateB2BLineCountError__c, '
          +' ValidationErrorsOrder__c, '
          +' ValidationErrorsOrderProducts__c, '
+         +' ValidateIGComponentMismatch__c,'
          +' WarehouseReference__c, '
          +' WarehouseReferenceActive__c,'
          +' Shipto__r.NetsuiteInternalId__c, ' 
