@@ -590,9 +590,11 @@ public with sharing class Order_SoqlFactory {
        +' from Pricing__c where IsActive__c =true ';
     
        if(Type != 'Pricebookentrycreate' && Type != 'UpdatePricingfromProduct'){
-        Querystr += 'AND ((StartDate__c <=: PricebookStart AND EndDate__c >=: PricebookStart) OR (StartDate__c <=: PricebookEnd AND EndDate__c >=: PricebookEnd))';
+        Querystr += 'AND ((StartDate__c <=: PricebookStart AND EndDate__c >=: PricebookStart)'
+                    + ' OR (StartDate__c <=: PricebookEnd AND EndDate__c >=: PricebookEnd)'
+                    + ' OR  (StartDate__c <= PricebookStart && price.EndDate__c >= PricebookEnd))';
+            
        } 
-
        if(Type == 'ProductSelector1'){
             Querystr += 'AND(ProductComponent__r.MainProduct__c in: Set_ProdItemGroup OR ProductComponent__r.Product__c in: Set_ProdItemGroup OR Product__c in: Set_ProdItemGroup )';
         }
