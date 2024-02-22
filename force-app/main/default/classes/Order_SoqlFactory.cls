@@ -592,6 +592,7 @@ public with sharing class Order_SoqlFactory {
        if(Type != 'Pricebookentrycreate' && Type != 'UpdatePricingfromProduct'){
         Querystr += 'AND ((StartDate__c <=: PricebookStart AND EndDate__c >=: PricebookStart)'
                     + ' OR (StartDate__c <=: PricebookEnd AND EndDate__c >=: PricebookEnd)'
+                    + ' OR (StartDate__c >=: PricebookStart AND EndDate__c <=: PricebookEnd)'
                     + ' OR  (StartDate__c <=: PricebookStart AND EndDate__c >=: PricebookEnd))';
             
        } 
