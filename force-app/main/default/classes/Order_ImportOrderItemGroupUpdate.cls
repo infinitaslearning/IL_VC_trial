@@ -23,14 +23,16 @@ public with sharing class Order_ImportOrderItemGroupUpdate {
         List<OrderItem> FlowOrderItems = new List<OrderItem>();
         List<ImportOrder__c> FlowImportOrder = new List<ImportOrder__c>();
         List<ImportOrder__c> ListOfImportOrder = new List<ImportOrder__c>();
-        Set<String> Set_OrderId = new Set<String>();
+        //Set<String> Set_OrderId = new Set<String>();
         Set<String> Set_OrderLineId = new Set<String>();
+        List<Id> OrderId = new List<Id>();
 
         Set<String> Set_ExternalOrderId = new Set<String>();
         Set<String> Set_ImportOrderId = new Set<String>();
 
         for(Request r:req){
-            Set_OrderId.add(r.SingleOrderItems.OrderId);
+           // Set_OrderId.add(r.SingleOrderItems.OrderId);
+            OrderId.add(r.SingleOrderItems.OrderId);
             FlowOrderItems.add(r.SingleOrderItems);
             FlowImportOrder.add(r.ImportOrder);
             Set_OrderLineId.add(r.SingleOrderItems.id);
@@ -41,8 +43,12 @@ public with sharing class Order_ImportOrderItemGroupUpdate {
 
         }
         
-        ListOfOrderItems = [Select id,ItemGroup__c,Product2Id,NetsuiteQuantity__c,Quantity,ProductComponent__c,ProductType__c,NetSalesPriceItemGroup__c,DiscountedPriceItemGroup__c,ListPriceItemGroup__c,ComponentListPrice__c,ManualDiscount__c,ManualDiscountPercent__c,ManualDiscountValue__c from OrderItem where OrderId in: Set_OrderId];
-       // ListOfOrderItems.addAll(FlowOrderItems);
+       // ListOfOrderItems = [Select id,ItemGroup__c,Product2Id,NetsuiteQuantity__c,Quantity,ProductComponent__c,ProductType__c,NetSalesPriceItemGroup__c,DiscountedPriceItemGroup__c,ListPriceItemGroup__c,ComponentListPrice__c,ManualDiscount__c,ManualDiscountPercent__c,ManualDiscountValue__c from OrderItem where OrderId in: Set_OrderId];
+       
+       ListOfOrderItems =  Order_SoqlFactory.returnQueryOrderItems(null,OrderId,null,null);		
+        system.debug('**Order_SoqlFactory.Order_ImportOrderItemGroupUpdate.ListOfOrderItems :Size**'+ListOfOrderItems.size()); 
+          
+        // ListOfOrderItems.addAll(FlowOrderItems);
         
        /*
         for(OrderItem item:ListOfOrderItems){
