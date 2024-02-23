@@ -1752,11 +1752,11 @@ public class Order_ProductSelectController {
                 OItem.OrderStatus__c = 'Draft';
                 OItem.OrderId = NewOrderId; 
                 OItem.InsertProductSelector__c = true;
-          /*      
+               
                 if(CurOrder[0].MultipleShippingLocations__c == false && CurOrder[0].Hfdstructuur__c != null){
                     OItem.Hfdstructuur__c = CurOrder[0].Hfdstructuur__c;
                 }    
-         */       
+                
                 
                 OItem.ComponentListPrice__c = Item.BasePrice;
                 if(item.ItemGroup == null && item.ItemGroupComponent== true){

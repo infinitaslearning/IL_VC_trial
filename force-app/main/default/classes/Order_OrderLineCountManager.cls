@@ -424,6 +424,11 @@ public with sharing class Order_OrderLineCountManager implements Queueable {
                 Insert newOrder;
                  Set_OrdId.add(newOrder.id);
             }
+            else{
+                newOrder = new Order[]{CurOrder}
+
+                ItemGroupListsize++;
+            }
                                                                              
           
 
