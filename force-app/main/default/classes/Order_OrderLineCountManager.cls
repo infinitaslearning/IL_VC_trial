@@ -427,8 +427,8 @@ public with sharing class Order_OrderLineCountManager implements Queueable {
             else{
                 newOrder = new Order();
                 newOrder = CurOrder;
-                NewOrder.OrderImportLineCountSent__c = Map_ImpLineCount.get(LoopChunks);
-                NewOrder.OrderImportTotalLineQuantities__c = Map_ImpLineCountQuantity.get(LoopChunks);
+                CurOrder.OrderImportLineCountSent__c = Map_ImpLineCount.get(LoopChunks);
+                CurOrder.OrderImportTotalLineQuantities__c = Map_ImpLineCountQuantity.get(LoopChunks);
                 ItemGroupListsize++;
             }
                                                                              
@@ -546,9 +546,12 @@ public with sharing class Order_OrderLineCountManager implements Queueable {
             MaxOrderLine.OrderTotal__c = CurOrder.TotalAmount;
             
             Order[] CurOrderGET = [Select id,LineCount__c from Order where id =:CurOrder.id];                                                                                                
-
-            CurOrder.OrderImportLineCountSent__c = Map_ImpLineCount.get(99999999); //CurOrderGET[0].LineCount__c;
-            CurOrder.OrderImportTotalLineQuantities__c = Map_ImpLineCountQuantity.get(99999999);
+            
+            if(Map_ImpLineCount.get(99999999) != null){
+                CurOrder.OrderImportLineCountSent__c = Map_ImpLineCount.get(99999999); //CurOrderGET[0].LineCount__c;
+                CurOrder.OrderImportTotalLineQuantities__c = Map_ImpLineCountQuantity.get(99999999);
+            }
+            
             CurOrder.MaxOrderLine__c = MaxOrderLine.id;
             CurOrder.ActivateforBatchProcessing__c= ActivateforBatchProcessing;
             CurOrder.RelatedOrderActivationBlock__c = true; 
