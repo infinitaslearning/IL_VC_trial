@@ -427,7 +427,8 @@ public with sharing class Order_OrderLineCountManager implements Queueable {
             else{
                 newOrder = new Order();
                 newOrder = CurOrder;
-
+                NewOrder.OrderImportLineCountSent__c = Map_ImpLineCount.get(LoopChunks);
+                NewOrder.OrderImportTotalLineQuantities__c = Map_ImpLineCountQuantity.get(LoopChunks);
                 ItemGroupListsize++;
             }
                                                                              
