@@ -4,7 +4,7 @@
     <assignments>
         <name>Add_to_Collection</name>
         <label>Add to Collection</label>
-        <locationX>1502</locationX>
+        <locationX>1700</locationX>
         <locationY>1058</locationY>
         <assignmentItems>
             <assignToReference>soc_AssignPermissionsets</assignToReference>
@@ -20,7 +20,7 @@
     <assignments>
         <name>Assign_PermissionSet</name>
         <label>Assign PermissionSet</label>
-        <locationX>1502</locationX>
+        <locationX>1700</locationX>
         <locationY>950</locationY>
         <assignmentItems>
             <assignToReference>sov_AssignPermissionSet.PermissionSetId</assignToReference>
@@ -50,7 +50,7 @@
     <assignments>
         <name>Default_user_checkbox</name>
         <label>Default user checkbox</label>
-        <locationX>1414</locationX>
+        <locationX>1612</locationX>
         <locationY>134</locationY>
         <assignmentItems>
             <assignToReference>sov_User.UserPermissionsMarketingUser</assignToReference>
@@ -109,10 +109,26 @@
             <targetReference>Loop_Permissionsets</targetReference>
         </connector>
     </assignments>
+    <assignments>
+        <name>User_CheckboxNH3</name>
+        <label>User Checkbox</label>
+        <locationX>578</locationX>
+        <locationY>566</locationY>
+        <assignmentItems>
+            <assignToReference>sov_User.UserPermissionsSupportUser</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Permissionsets</targetReference>
+        </connector>
+    </assignments>
     <decisions>
         <name>Operating_Company</name>
         <label>Operating Company</label>
-        <locationX>1414</locationX>
+        <locationX>1612</locationX>
         <locationY>242</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -179,7 +195,7 @@
     <decisions>
         <name>Role_Liber</name>
         <label>Role Liber</label>
-        <locationX>2118</locationX>
+        <locationX>2382</locationX>
         <locationY>350</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -201,7 +217,7 @@
     <decisions>
         <name>Role_Noordhoff</name>
         <label>Role Noordhoff</label>
-        <locationX>314</locationX>
+        <locationX>446</locationX>
         <locationY>350</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -234,11 +250,26 @@
             </connector>
             <label>Noordhoff Knowledge Base Manager</label>
         </rules>
+        <rules>
+            <name>Noordhoff_Customer_Service_Manager</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>sov_User.UserRole.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Noordhoff_Customer_Service_Manager</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_PermissionsetsNH3</targetReference>
+            </connector>
+            <label>Noordhoff Customer Service Manager</label>
+        </rules>
     </decisions>
     <decisions>
         <name>Role_Noordhoff_Professional</name>
         <label>Role Noordhoff Professional</label>
-        <locationX>1018</locationX>
+        <locationX>1282</locationX>
         <locationY>350</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -275,7 +306,7 @@
     <decisions>
         <name>Role_Plantyn</name>
         <label>Role Plantyn</label>
-        <locationX>1590</locationX>
+        <locationX>1854</locationX>
         <locationY>350</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
@@ -301,7 +332,7 @@
     <loops>
         <name>Loop_Permissionsets</name>
         <label>Loop Permissionsets</label>
-        <locationX>1414</locationX>
+        <locationX>1612</locationX>
         <locationY>842</locationY>
         <collectionReference>soc_Permissionsets</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -334,14 +365,14 @@
     <recordCreates>
         <name>Assign_Permissionsets</name>
         <label>Assign Permissionsets</label>
-        <locationX>1414</locationX>
+        <locationX>1612</locationX>
         <locationY>1358</locationY>
         <inputReference>soc_AssignPermissionsets</inputReference>
     </recordCreates>
     <recordLookups>
         <name>Get_PermissionsetLI1</name>
         <label>Get Permissionsets</label>
-        <locationX>1986</locationX>
+        <locationX>2250</locationX>
         <locationY>458</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -507,9 +538,65 @@
         <queriedFields>Id</queriedFields>
     </recordLookups>
     <recordLookups>
+        <name>Get_PermissionsetsNH3</name>
+        <label>Get Permissionsets</label>
+        <locationX>578</locationX>
+        <locationY>458</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>User_CheckboxNH3</targetReference>
+        </connector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>ManageCases</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>ManageAccounts</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>OrderActivation</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>ServiceUserPsl</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>NoordhoffCustomerService_OmniChannelRouting</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>CreateOrders</stringValue>
+            </value>
+        </filters>
+        <object>PermissionSet</object>
+        <outputReference>soc_Permissionsets</outputReference>
+        <queriedFields>Id</queriedFields>
+    </recordLookups>
+    <recordLookups>
         <name>Get_PermissionsetsP1</name>
         <label>Get Permissionsets</label>
-        <locationX>1458</locationX>
+        <locationX>1722</locationX>
         <locationY>458</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -572,7 +659,7 @@
     <recordUpdates>
         <name>Update_User</name>
         <label>Update User</label>
-        <locationX>1414</locationX>
+        <locationX>1612</locationX>
         <locationY>1250</locationY>
         <connector>
             <targetReference>Assign_Permissionsets</targetReference>
@@ -580,7 +667,7 @@
         <inputReference>sov_User</inputReference>
     </recordUpdates>
     <start>
-        <locationX>1288</locationX>
+        <locationX>1486</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Default_user_checkbox</targetReference>
