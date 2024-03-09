@@ -2,6 +2,153 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>53.0</apiVersion>
     <assignments>
+        <description>Billing and Shipping Address values updated</description>
+        <name>Assign_Address_Values</name>
+        <label>Assign Address Values</label>
+        <locationX>600</locationX>
+        <locationY>3527</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.BillingHouseNumber__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.BillingAddress__r.HouseNumber__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.BillingHouseNumberAddition__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.BillingAddress__r.HouseNumberAddition__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.BillingStreetName__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.BillingAddress__r.Street__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.ShippingHouseNumber__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.ShippingAddress__r.HouseNumber__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.ShippingHouseNumberAddition__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.ShippingAddress__r.HouseNumberAddition__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.ShippingStreetName__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.ShippingAddress__r.Street__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.BillingAddressStatusCode__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>F_BillingAddressRecordStatus</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.BillToAddressValidated__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>F_BillingAddressValidated</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.ShippingAddressStatusCode__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.ShippingAddress__r.rv2Status__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.ShipToAddressValidated__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>F_ShippingAddressValidated</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.BillingStreet</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>F_BillingStreetConcatenate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.BillingPostalCode</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.BillingAddress__r.PostalCode__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.BillingCity</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.BillingAddress__r.City__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.BillingCountry</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.BillingAddress__r.Country__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.ShippingStreet</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>F_ShippingStreetConcatenate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.ShippingPostalCode</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.ShippingAddress__r.PostalCode__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.ShippingCity</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.ShippingAddress__r.City__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.ShippingCountry</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.ShippingAddress__r.Country__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.BillingCountryCode</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.BillingAddress__r.CountryCode__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.ShippingCountryCode</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.ShippingAddress__r.CountryCode__c</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
         <name>Assign_Country_Code</name>
         <label>Assign Country Code</label>
         <locationX>600</locationX>
@@ -13,6 +160,9 @@
                 <elementReference>DialCodeWithPhone</elementReference>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Update_Address_Lookup_Fields</targetReference>
+        </connector>
     </assignments>
     <assignments>
         <name>Assign_Liber</name>
@@ -485,6 +635,9 @@
         <label>Phone with Country Code</label>
         <locationX>732</locationX>
         <locationY>3011</locationY>
+        <defaultConnector>
+            <targetReference>Update_Address_Lookup_Fields</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Set_Phone_with_Country_Code</name>
@@ -509,17 +662,72 @@
             <label>Set Phone with Country Code</label>
         </rules>
     </decisions>
+    <decisions>
+        <name>Update_Address_Lookup_Fields</name>
+        <label>Update Address Lookup Fields</label>
+        <locationX>732</locationX>
+        <locationY>3419</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Assign_New_Values</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.BillingAddress__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.ShippingAddress__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Address_Values</targetReference>
+            </connector>
+            <label>Assign New Values</label>
+        </rules>
+    </decisions>
     <description>Added formula to populate Unique External Customer ID field with combination of External Database + External Customer ID
 DB: 28/03/2023 Added Validation fields as flow formulas and assign outcome to checkbox fields
 CH: 09/05/2023 Removed acc sub and shipping rule validation checks
 CH: 31/07/2023 Added validation against account name
 JK: 31/08/2023 Added finctionality to Full Name in the FullLegalName field if the FullLegalName field is Empty in insert
-DB: 28/03/2023 Removed Validation fields assignments</description>
+DB: 28/03/2023 Removed Validation fields assignments
+DB: 21/02/2024 Assign address values if billing/shipping address lookup changed</description>
     <environments>Default</environments>
     <formulas>
         <name>DialCodeWithPhone</name>
         <dataType>String</dataType>
         <expression>{!Get_Country_Code_Metadata.PhoneCountryDialCode__c}&amp;RIGHT({!$Record.Phone},(LEN( {!$Record.Phone})-FIND(&quot;0&quot;, {!$Record.Phone})))</expression>
+    </formulas>
+    <formulas>
+        <name>F_BillingAddressRecordStatus</name>
+        <dataType>String</dataType>
+        <expression>IF(ISPICKVAL({!$Record.BillingAddress__r.rv2Status__c}, &apos;GREEN&apos;), &apos;green&apos;, &apos;red&apos;)</expression>
+    </formulas>
+    <formulas>
+        <name>F_BillingAddressValidated</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(ISPICKVAL({!$Record.BillingAddress__r.rv2Status__c}, &apos;GREEN&apos;), true, false)</expression>
+    </formulas>
+    <formulas>
+        <name>F_BillingStreetConcatenate</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.BillingAddress__r.Street__c} &amp; &apos; &apos; &amp; {!$Record.BillingAddress__r.HouseNumber__c} &amp; {!$Record.BillingAddress__r.HouseNumberAddition__c}</expression>
+    </formulas>
+    <formulas>
+        <name>F_ShippingAddressValidated</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(ISPICKVAL({!$Record.ShippingAddress__r.rv2Status__c}, &apos;GREEN&apos;), true, false)</expression>
+    </formulas>
+    <formulas>
+        <name>F_ShippingStreetConcatenate</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.ShippingAddress__r.Street__c} &amp; &apos; &apos; &amp; {!$Record.ShippingAddress__r.HouseNumber__c} &amp; {!$Record.ShippingAddress__r.HouseNumberAddition__c}</expression>
     </formulas>
     <formulas>
         <name>F_ValidateAccountNameSoft</name>

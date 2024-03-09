@@ -831,7 +831,8 @@
         </rules>
     </decisions>
     <description>CH 02/10/2023: added address functionality for vendors
-DB 18/01/2024: create Contact if Account External Database equals UDB</description>
+DB 18/01/2024: create Contact if Account External Database equals UDB
+HdG 07/03/2024: add additional fields to UDB create contact</description>
     <environments>Default</environments>
     <formulas>
         <name>Check_Higher</name>
@@ -1162,6 +1163,48 @@ NOT(BEGINS( {!$Record.Website}, &apos;http://&apos;))) || CONTAINS({!$Record.Web
             </value>
         </inputAssignments>
         <inputAssignments>
+            <field>MailingCity</field>
+            <value>
+                <elementReference>$Record.BillingCity</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>MailingCountry</field>
+            <value>
+                <elementReference>$Record.BillingCountry</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>MailingCountryCode</field>
+            <value>
+                <elementReference>$Record.BillingCountryCode</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>MailingPostalCode</field>
+            <value>
+                <elementReference>$Record.BillingPostalCode</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>MailingState</field>
+            <value>
+                <elementReference>$Record.BillingState</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>MailingStateCode</field>
+            <value>
+                <elementReference>$Record.BillingStateCode</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>MailingStreet</field>
+            <value>
+                <elementReference>$Record.BillingStreet</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <field>MiddleName</field>
             <value>
                 <elementReference>$Record.authorMiddleName__c</elementReference>
@@ -1174,9 +1217,57 @@ NOT(BEGINS( {!$Record.Website}, &apos;http://&apos;))) || CONTAINS({!$Record.Web
             </value>
         </inputAssignments>
         <inputAssignments>
+            <field>OtherCity</field>
+            <value>
+                <elementReference>$Record.ShippingCity</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OtherCountry</field>
+            <value>
+                <elementReference>$Record.ShippingCountry</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OtherCountryCode</field>
+            <value>
+                <elementReference>$Record.ShippingCountryCode</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OtherPostalCode</field>
+            <value>
+                <elementReference>$Record.ShippingPostalCode</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OtherState</field>
+            <value>
+                <elementReference>$Record.ShippingState</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OtherStateCode</field>
+            <value>
+                <elementReference>$Record.ShippingStateCode</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OtherStreet</field>
+            <value>
+                <elementReference>$Record.ShippingStreet</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <field>Phone</field>
             <value>
                 <elementReference>$Record.Phone</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PreferredEmail__c</field>
+            <value>
+                <stringValue>Email</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
