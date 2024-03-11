@@ -1228,7 +1228,7 @@ public class Order_ProductSelectController {
                                 prodlp.MarketSegment =  pbe.Product2.MarketSegment__c;
                                 
                                 Map_ProdLP.put(pbe.Product2Id,prodlp);
-                                
+                                system.debug('**Order_ProductSelectController: ProdComp1**'+pbe.Product2Id);
                                 
         /*------REMOVE-----------      
                             if(Map_ProductListPrice.get(Map_ItemGroup.get(pbe.Product2Id)) == null){
@@ -1249,7 +1249,7 @@ public class Order_ProductSelectController {
                 for(Pricing__c item:lstPrice){
                     if((item.ProductComponent__r.Type__c=='Item Group Component' || item.ProductComponent__r.Type__c=='Kit Component') && Map_ItemGroup.get(item.ProductComponent__r.Product__c) != null ){
                             ProductListPrice prodlp = new ProductListPrice();
-                
+                            system.debug('**Order_ProductSelectController: ProdComp2**'+item.ProductComponent__r.Product__c);
                             prodlp = Map_ProdLP.get(item.ProductComponent__r.Product__c).clone();
                             prodlp.ItemGroup = item.ProductComponent__r.MainProduct__c;
                             prodlp.ItemGroupId = item.ProductComponent__c;
