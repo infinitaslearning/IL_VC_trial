@@ -1272,7 +1272,7 @@ public class Order_ProductSelectController {
                                     Map_ProductListPrice.get(item.ProductComponent__r.MainProduct__c).add(prodlp); //item.ProductComponent__r.MainProduct__c
                             }
 
-                            /* FOR TESTING */
+                            /* FOR TESTING 
                             
                             for(String pid:Map_ProductListPrice.keyset()){
                                 for(ProductListPrice prodlp2:Map_ProductListPrice.get(pid)){
@@ -1280,7 +1280,7 @@ public class Order_ProductSelectController {
                                 } 
                             }
                             i++;
-                            
+                            */
                     }
                             
         
