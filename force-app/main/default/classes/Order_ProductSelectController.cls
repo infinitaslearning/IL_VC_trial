@@ -1247,7 +1247,7 @@ public class Order_ProductSelectController {
 
 //------ADD----------- 
                 for(Pricing__c item:lstPrice){
-                    if(item.ProductComponent__r.Type__c=='Item Group Component' || item.ProductComponent__r.Type__c=='Kit Component' ){
+                    if((item.ProductComponent__r.Type__c=='Item Group Component' || item.ProductComponent__r.Type__c=='Kit Component') && Map_ItemGroup.get(pbe.Product2Id) != null ){
                             ProductListPrice prodlp = new ProductListPrice();
                 
                             prodlp = Map_ProdLP.get(item.ProductComponent__r.Product__c).clone();
