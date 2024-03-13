@@ -1146,16 +1146,19 @@ public class Order_ProductSelectController {
            
     
             //Populate Item Group map
+ 
             List<PricebookEntry> ProductsbyItemGroup;
             if(Map_ItemGroup.size()>0){
                 /*
                 ProductsbyItemGroup = new List <PricebookEntry>([Select Product2.CustomPricingAllowed__c,Product2.Renewable__c,Product2.OrderLineType__c,Product2.ISBNArticleNumber__c,Product2.MarketSegment__c,Product2.name,Product2.SoldInSegment__c, Product2.QuantitySelectionType__c,Product2.ProductDiscountGroup__c,Product2.ProductRateGroup__c,Product2.Type__c,productcode,unitprice,Product2Id from PricebookEntry //,
                 where Pricebook2Id =:Pricebook2Id AND Product2Id in:Map_ItemGroup.keyset() ]); //AND IsActive =:true
                 */
+                
+                Map<string,ProductListPrice> Map_ProdLP = new Map<string,ProductListPrice>();
 
                 ProductsbyItemGroup = Order_SoqlFactory.returnPricebookEntry('ProductSelectorItemGroup', null, null,null,Pricebook2Id,Map_ItemGroup,null,null,null);		
 	            system.debug('**Order_SoqlFactory.Order_ProductSelectController.loadProductsbyPriceBook.ProductsbyPriceBook:Load :Size**'+ProductsbyPriceBook.size());
-
+                    integer i=0;
                     for(PricebookEntry pbe:ProductsbyItemGroup){
                         
                         if(Map_ItemGroup.get(pbe.Product2Id) != null){ 
@@ -1224,6 +1227,10 @@ public class Order_ProductSelectController {
                                 prodlp.ManualDiscount = ManualDiscount;
                                 prodlp.MarketSegment =  pbe.Product2.MarketSegment__c;
                                 
+                                Map_ProdLP.put(pbe.Product2Id,prodlp);
+                                system.debug('**Order_ProductSelectController: ProdComp1**'+pbe.Product2Id);
+                                
+        /*------REMOVE-----------      
                             if(Map_ProductListPrice.get(Map_ItemGroup.get(pbe.Product2Id)) == null){
                                 lstProductListPrice = new List<ProductListPrice>();
                                 lstProductListPrice.add(prodlp);
@@ -1232,12 +1239,59 @@ public class Order_ProductSelectController {
                             else if(Map_ProductListPrice.get(Map_ItemGroup.get(pbe.Product2Id)) != null){
                                 Map_ProductListPrice.get(Map_ItemGroup.get(pbe.Product2Id)).add(prodlp);
                             }
-    
+        -----------------*/
+
+        
                         }        
                 }
+
+//------ADD----------- 
+                for(Pricing__c item:lstPrice){
+                    if((item.ProductComponent__r.Type__c=='Item Group Component' || item.ProductComponent__r.Type__c=='Kit Component') && Map_ProdLP.get(item.ProductComponent__r.Product__c) != null ){
+                            ProductListPrice prodlp = new ProductListPrice();
+                            system.debug('**Order_ProductSelectController: ProdComp2**'+item.ProductComponent__r.Product__c);
+                            prodlp = Map_ProdLP.get(item.ProductComponent__r.Product__c).clone();
+                            prodlp.ItemGroup = item.ProductComponent__r.MainProduct__c;
+                            prodlp.ItemGroupId = item.ProductComponent__c;
+                            
+                            prodlp.ComponentQuantity = item.ProductComponent__r.Quantity__c;
+                            prodlp.ComponentQuantityTitle = 'Pack quantity: '+item.ProductComponent__r.Quantity__c;
+                            
+                            prodlp.BasePrice  = item.ListRate__c;
+                            prodlp.UnitPrice  = item.ListRate__c; 
+                            prodlp.STDPrice   =  item.ListRate__c;
+
+                            
+                    
+                            if(Map_ProductListPrice.get(item.ProductComponent__r.MainProduct__c) == null){
+                                    lstProductListPrice = new List<ProductListPrice>();
+                                    lstProductListPrice.add(prodlp);
+                                    Map_ProductListPrice.put(item.ProductComponent__r.MainProduct__c,lstProductListPrice);  //item.ProductComponent__r.MainProduct__c
+                            }
+                            else if(Map_ProductListPrice.get(item.ProductComponent__r.MainProduct__c) != null){ //item.ProductComponent__r.MainProduct__c
+                                    Map_ProductListPrice.get(item.ProductComponent__r.MainProduct__c).add(prodlp); //item.ProductComponent__r.MainProduct__c
+                            }
+
+                            /* FOR TESTING 
+                            
+                            for(String pid:Map_ProductListPrice.keyset()){
+                                for(ProductListPrice prodlp2:Map_ProductListPrice.get(pid)){
+                                    system.debug('**Order_ProductSelectController: lstProductListPrice: prodlp.BasePrice_0**'+i+'**'+pid+'**'+prodlp2.ProductId+'****'+prodlp2.BasePrice);
+                                } 
+                            }
+                            i++;
+                            */
+                    }
+                            
+        
+                }
+        //----------------- 
+
+
+
+
         }
-      
-    
+        
             lstProductListPrice = new List<ProductListPrice>();
         for(PricebookEntry pbe:ProductsbyPriceBook){
             
@@ -1327,6 +1381,7 @@ public class Order_ProductSelectController {
                             if(Map_ProductListPrice.get(pbe.Product2Id) != null){
                                 prodlp.listItemGroupComponent  = Map_ProductListPrice.get(pbe.Product2Id);
                                 prodlp.ItemGroupComponent = true;
+                                
                             }
                             else{
                                 prodlp.ItemGroupComponent = false;   
