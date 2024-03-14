@@ -26,7 +26,7 @@ public with sharing class Order_AssetsCreateOnOrderActivation implements Queueab
    }
     
   public void execute(System.QueueableContext qc) {
-    processAssetsFromOrder(ItemIdFullList,ItemId,CalledFromInvocable);
+   // processAssetsFromOrder(ItemIdFullList,ItemId,CalledFromInvocable);
   }   
 
 
