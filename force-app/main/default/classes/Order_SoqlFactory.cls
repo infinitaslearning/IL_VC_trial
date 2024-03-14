@@ -9,6 +9,7 @@ public with sharing class Order_SoqlFactory {
             
             Querystr= 'Select id,'
             +' AccountSubsidiary__c,'
+            +' Asset__c,'
             +' CustomerReference__c,'
              +' ComponentListPrice__c,'
              +'  DeliveryType__c,'
