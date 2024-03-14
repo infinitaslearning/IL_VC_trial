@@ -26,7 +26,7 @@ public with sharing class Order_AssetsCreateOnOrderActivation implements Queueab
    }
     
   public void execute(System.QueueableContext qc) {
-   // processAssetsFromOrder(ItemIdFullList,ItemId,CalledFromInvocable);
+    processAssetsFromOrder(ItemIdFullList,ItemId,CalledFromInvocable);
   }   
 
 
@@ -58,7 +58,7 @@ public with sharing class Order_AssetsCreateOnOrderActivation implements Queueab
                     */
                     Set<string> Set_string = new Set<String>();
                     for(Id  item:ItemId){
-                        ItemId.add(item);
+                        Set_string.add(item);
                     }  
 
                     OrderItem[] lstOrderItem =  Order_SoqlFactory.returnQueryOrderItems(Set_string,null,null,'AssetsCreateOnOrderActivation');
