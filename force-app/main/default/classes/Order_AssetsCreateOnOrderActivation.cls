@@ -61,7 +61,7 @@ public with sharing class Order_AssetsCreateOnOrderActivation implements Queueab
                         ItemId.add(item);
                     }  
 
-                    OrderItem[] lstOrderItem =  Order_SoqlFactory.returnQueryOrderItems(Set_string,null,null,null);
+                    OrderItem[] lstOrderItem =  Order_SoqlFactory.returnQueryOrderItems(Set_string,null,null,'AssetsCreateOnOrderActivation');
                     system.debug('**Order_SoqlFactory.Order_AssetsCreateOnOrderA.lstOrderItem :Size**'+lstOrderItem.size());                                    
                                                         
                                                                 //!-- INFORMAT RENEWALS
